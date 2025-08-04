@@ -54,8 +54,10 @@ func main() {
 	go webserver.Start()
 
 	grpcServer := grpc.NewServer()
-	createOrderService := service.NewOrderService(*createOrderUseCase, *listOrdersUseCase)
+	createOrderService := service.NewOrderService(*createOrderUseCase)
 	pb.RegisterOrderServiceServer(grpcServer, createOrderService)
+	listOrdersService := service.NewListOrdersService(*listOrdersUseCase)
+	pb.RegisterListOrdersServiceServer(grpcServer, listOrdersService)
 	reflection.Register(grpcServer)
 
 	fmt.Println("Starting gRPC server on port", configs.GRPCServerPort)

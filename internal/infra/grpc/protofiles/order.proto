@@ -15,13 +15,6 @@ message CreateOrderResponse {
   float final_price = 4;
 }
 
-message ListOrdersResponse {
-  repeated CreateOrderResponse orders = 1;
-}
-
-message Blank {}
-
 service OrderService {
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
-  rpc ListOrders(Blank) returns (ListOrdersResponse);
 }
